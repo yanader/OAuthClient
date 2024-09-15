@@ -10,7 +10,7 @@ import java.util.Map;
 @RestController
 public class UserController {
 
-    @GetMapping("user-info")
+    @GetMapping("/user-info")
     public Map<String, Object> user(
             @AuthenticationPrincipal OAuth2User principle) {
         return principle.getAttributes();
