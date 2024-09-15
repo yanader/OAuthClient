@@ -10,4 +10,6 @@ public class GreetingsController{
     public String sayHello() {
         return "Hello";
     }
+
+
 }
