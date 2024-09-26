@@ -26,7 +26,7 @@ public class UserController {
         Map<String, Object> userInfo = new HashMap<>();
         userInfo.put("name", user.getName());
         userInfo.put("email", user.getEmail());
-        userInfo.put("loginCount", user.getLoginCount());
+        userInfo.put("picture", user.getImgUrl());
 
         return userInfo;
     }

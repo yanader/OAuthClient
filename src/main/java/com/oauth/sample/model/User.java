@@ -20,7 +20,7 @@ public class User {
     private String imgUrl;
 
     @Column(nullable = false)
-    private int loginCount;
+    private String loginSource;
 
     public Long getId() {
         return id;
@@ -50,11 +50,12 @@ public class User {
         this.imgUrl = imgUrl;
     }
 
-    public int getLoginCount() {
-        return loginCount;
+    public String getLoginSource() {
+        return loginSource;
     }
 
-    public void setLoginCount(int loginCount) {
-        this.loginCount = loginCount;
+    public void setLoginSource(String loginSource) {
+        this.loginSource = loginSource;
     }
+
 }
