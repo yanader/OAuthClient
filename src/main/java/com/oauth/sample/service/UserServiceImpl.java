@@ -63,9 +63,9 @@ public class UserServiceImpl implements UserService{
     @Override
     public User processGithubOAuthLogin(OAuth2User principal, String platform) {
         User newUser = new User();
-        newUser.setEmail(principal.getAttribute("email"));
-        newUser.setName(principal.getAttribute("name"));
-        newUser.setImgUrl(principal.getAttribute("picture"));
+        newUser.setEmail("n/a");
+        newUser.setName(principal.getAttribute("login"));
+        newUser.setImgUrl(principal.getAttribute("avatar_url"));
         newUser.setLoginSource(platform);
         return newUser;
     }
