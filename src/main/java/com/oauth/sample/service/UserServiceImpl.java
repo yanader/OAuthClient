@@ -3,6 +3,9 @@ package com.oauth.sample.service;
 import com.oauth.sample.model.User;
 import com.oauth.sample.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +24,7 @@ public class UserServiceImpl implements UserService{
 
         Optional<User> existingUser = userRepository.findByEmail(email);
 
+
         if (existingUser.isPresent()) {
             User user = existingUser.get();
             return userRepository.save(user);
@@ -29,9 +33,27 @@ public class UserServiceImpl implements UserService{
             newUser.setEmail(email);
             newUser.setName(principal.getAttribute("name"));
             newUser.setImgUrl(principal.getAttribute("picture"));
-            newUser.setLoginSource("Google");
+
+            newUser.setLoginSource();
             return userRepository.save(newUser);
 
         }
+    }
+
+    @Override
+    public String extractOAuth2Platform() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        OAuth2AuthenticationToken authToken = (OAuth2AuthenticationToken) authentication;
+        return authToken.getAuthorizedClientRegistrationId();
+    }
+
+    @Override
+    public User processGoogleOAuthLogin(OAuth2User principal, String oAuth2Platform) {
+        return null;
+    }
+
+    @Override
+    public User processGithubOAuthLogin(OAuth2User principal, String oAuth2Platform) {
+        return null;
     }
 }
