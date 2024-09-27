@@ -24,8 +24,6 @@ public class UserController {
     public Map<String, Object> user(
             @AuthenticationPrincipal OAuth2User principal) {
 
-        System.out.println(principal);
-
 
         User user = userService.processOAuthPostLogin(principal);
 
