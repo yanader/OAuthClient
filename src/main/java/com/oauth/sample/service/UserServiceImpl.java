@@ -30,15 +30,7 @@ public class UserServiceImpl implements UserService{
             return userRepository.save(user);
         } else {
             String platform = extractOAuth2Platform();
-
-
-//            newUser.setEmail(email);
-//            newUser.setName(principal.getAttribute("name"));
-//            newUser.setImgUrl(principal.getAttribute("picture"));
-//            newUser.setLoginSource();
-
             User newUser = setUpNewUser(principal, platform);
-
             return userRepository.save(newUser);
 
         }
@@ -60,13 +52,21 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User processGoogleOAuthLogin(OAuth2User principal, String platform) {
-        
-
-        return null;
+        User newUser = new User();
+        newUser.setEmail(principal.getAttribute("email"));
+        newUser.setName(principal.getAttribute("name"));
+        newUser.setImgUrl(principal.getAttribute("picture"));
+        newUser.setLoginSource(platform);
+        return newUser;
     }
 
     @Override
-    public User processGithubOAuthLogin(OAuth2User principal, String oAuth2Platform) {
-        return null;
+    public User processGithubOAuthLogin(OAuth2User principal, String platform) {
+        User newUser = new User();
+        newUser.setEmail(principal.getAttribute("email"));
+        newUser.setName(principal.getAttribute("name"));
+        newUser.setImgUrl(principal.getAttribute("picture"));
+        newUser.setLoginSource(platform);
+        return newUser;
     }
 }
